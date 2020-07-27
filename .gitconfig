@@ -1,6 +1,6 @@
 [user]
-  name = Jeff Geerling
-  email = geerlingguy@mac.com
+	email = dominic@fable.sh
+	name = Dominic Gunn
 [core]
   editor = vi
   excludesfile = ~/.gitignore
