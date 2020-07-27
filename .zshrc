@@ -11,6 +11,9 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+export ZSH="/Users/dgunn/.oh-my-zsh"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+
 # Colors.
 unset LSCOLORS
 export CLICOLOR=1
