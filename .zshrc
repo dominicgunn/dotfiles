@@ -4,6 +4,13 @@
 # @author Jeff Geerling
 #
 
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block, everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Colors.
 unset LSCOLORS
 export CLICOLOR=1
@@ -16,7 +23,7 @@ unsetopt nomatch
 export PS1=$'\n'"%F{green} %*%F %3~ %F{white}$ "
 
 # Enable plugins.
-plugins=(git brew history kubectl history-substring-search)
+plugins=(git brew history kubectl)
 
 # Custom $PATH with extra locations.
 export PATH=/usr/local/bin:/usr/local/sbin:$HOME/bin:$HOME/go/bin:/usr/local/git/bin:$HOME/.composer/vendor/bin:$PATH
@@ -30,17 +37,15 @@ then
   source ~/.aliases
 fi
 
-# Allow history search via up/down keys.
-source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
-bindkey "^[[A" history-substring-search-up
-bindkey "^[[B" history-substring-search-down
-
 # Git aliases.
 alias gs='git status'
 alias gc='git commit'
 alias gp='git pull --rebase'
 alias gcam='git commit -am'
 alias gl='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
+
+alias powershell='pwsh'
+alias busybox='kubectl run -i --tty busybox --image=alpine --restart=Never --rm -- sh'
 
 # Completions.
 autoload -Uz compinit && compinit
@@ -66,6 +71,7 @@ function gsync() {
  git push origin "$1"
 }
 
+
 # Tell homebrew to not autoupdate every single time I run it (just once a week).
 export HOMEBREW_AUTO_UPDATE_SECS=604800
 
@@ -85,6 +91,16 @@ prod_command_trap () {
      return 1
    fi
  fi
+}
+
+listening() {
+    if [ $# -eq 0 ]; then
+        sudo lsof -iTCP -sTCP:LISTEN -n -P
+    elif [ $# -eq 1 ]; then
+        sudo lsof -iTCP -sTCP:LISTEN -n -P | grep -i --color $1
+    else
+        echo "Usage: listening [pattern]"
+    fi
 }
 
 #shopt -s extdebug
