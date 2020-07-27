@@ -4,21 +4,21 @@
 # @author Jeff Geerling
 #
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block, everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Install oh-my-zsh..
 export ZSH="/Users/dgunn/.oh-my-zsh"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
-# Source oh-my-zsh
-source $ZSH/oh-my-zsh.sh
+# Source p10k theme.
+source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # Don't require escaping globbing characters in zsh.
 unsetopt nomatch
+
+# Nicer prompt.
+export PS1=$'\n'"%F{green} %*%F %3~ %F{white}$ "
 
 # Enable plugins.
 plugins=(git brew history kubectl)
@@ -93,6 +93,3 @@ listening() {
 
 #shopt -s extdebug
 #trap prod_command_trap DEBUG
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
