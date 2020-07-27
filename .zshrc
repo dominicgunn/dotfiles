@@ -13,23 +13,12 @@ fi
 
 # Install oh-my-zsh..
 export ZSH="/Users/dgunn/.oh-my-zsh"
-ZSH_THEME="powerlevel10k/powerlevel10k"
+
+# Source oh-my-zsh
 source $ZSH/oh-my-zsh.sh
-
-# Source p10k theme.
-source ~/powerlevel10k/powerlevel10k.zsh-theme
-
-
-# Colors.
-unset LSCOLORS
-export CLICOLOR=1
-export CLICOLOR_FORCE=1
 
 # Don't require escaping globbing characters in zsh.
 unsetopt nomatch
-
-# Nicer prompt.
-export PS1=$'\n'"%F{green} %*%F %3~ %F{white}$ "
 
 # Enable plugins.
 plugins=(git brew history kubectl)
@@ -104,3 +93,6 @@ listening() {
 
 #shopt -s extdebug
 #trap prod_command_trap DEBUG
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
