@@ -7,6 +7,7 @@ set autoread            " watch for file changes
 set number              " show line numbers
 set showcmd             " show selection metadata
 set showmode            " show INSERT, VISUAL, etc. mode
+set mmp=10000
 set showmatch           " show matching brackets
 set autoindent smartindent  " auto/smart indent
 set smarttab            " better backspace and tab functionality
