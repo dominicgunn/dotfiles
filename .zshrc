@@ -27,6 +27,16 @@ plugins=(git brew kubectl cp command-not-found git-extras gnu-utils history pip 
 export PATH=$HOME/Library/Python/2.7/bin:$PATH
 export PATH=/usr/local/bin:/usr/local/sbin:$HOME/bin:$HOME/go/bin:/usr/local/git/bin:$HOME/.composer/vendor/bin:$PATH
 
+function setupKubeConfigs() {
+  KUBECONFIG=""
+  for f in $(ls $HOME/.kube/configs); do
+   export KUBECONFIG=$KUBECONFIG:$HOME/.kube/configs/$f;
+  done
+}
+
+
+setupKubeConfigs
+
 # Bash-style time output.
 export TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S'
 
