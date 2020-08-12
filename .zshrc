@@ -25,6 +25,7 @@ plugins=(git brew kubectl cp command-not-found git-extras gnu-utils history pip 
 
 # Custom $PATH with extra locations.
 export PATH=$HOME/Library/Python/2.7/bin:$PATH
+export PATH=/usr/local/opt/libpq/bin:$PATH
 export PATH=/usr/local/bin:/usr/local/sbin:$HOME/bin:$HOME/go/bin:/usr/local/git/bin:$HOME/.composer/vendor/bin:$PATH
 
 function setupKubeConfigs() {
