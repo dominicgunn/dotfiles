@@ -78,6 +78,15 @@ export HOMEBREW_AUTO_UPDATE_SECS=604800
 # Allow Composer to use almost as much RAM as Chrome.
 export COMPOSER_MEMORY_LIMIT=-1
 
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
+
+# ensure that JAVA_HOME is correct
+jenv enable-plugin export > /dev/null
+
+# make Maven aware of the Java version in use (and switch when your project does)
+jenv enable-plugin maven > /dev/null
+
 # Ask for confirmation when 'prod' is in a command string.
 prod_command_trap () {
  if [[ $BASH_COMMAND == *prod* ]]
