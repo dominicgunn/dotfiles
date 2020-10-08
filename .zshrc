@@ -21,7 +21,7 @@ unsetopt nomatch
 export PS1=$'\n'"%F{green} %*%F %3~ %F{white}$ "
 
 # Enable plugins.
-plugins=(git brew kubectl cp command-not-found git-extras gnu-utils history pip python screen ssh-agent docker docker-compose zsh-completions zsh-wakatime taskwarrior zsh-autosuggestions)
+plugins=(git brew kubectl cp command-not-found git-extras gnu-utils history pip python screen ssh-agent docker docker-compose zsh-completions zsh-wakatime taskwarrior zsh-syntax-highlighting zsh-autosuggestions)
 
 # Custom $PATH with extra locations.
 export PATH=$HOME/Library/Python/2.7/bin:$PATH
@@ -37,6 +37,11 @@ function setupKubeConfigs() {
 
 
 setupKubeConfigs
+
+# Tools for debugging Calico.
+alias calicoctl_install="kubectl apply -f https://docs.projectcalico.org/manifests/calicoctl.yaml"
+alias calicoctl_delete="kubectl delete -f https://docs.projectcalico.org/manifests/calicoctl.yaml"
+alias calicoctl="kubectl exec -i -n kube-system calicoctl -- /calicoctl"
 
 # Bash-style time output.
 export TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S'
@@ -111,6 +116,8 @@ listening() {
         echo "Usage: listening [pattern]"
     fi
 }
+
+export PATH="$PATH:$HOME/Applications/AIRSDK_MacOS/bin"
 
 #shopt -s extdebug
 #trap prod_command_trap DEBUG
